@@ -3,7 +3,7 @@
 
 ## About
 A public website and in-store ordering system designed
-for AnJ Pizza, a homemade pizza shop in Quezon City, Philippines.
+for AnJ Pizza, a homemade pizza shop in Lipa City, Philippines.
 
 ## Pages
 - `index.html` — Public website
