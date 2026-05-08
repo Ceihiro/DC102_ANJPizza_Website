@@ -147,5 +147,5 @@ Special thanks to **AnJ Pizza** for allowing us to use their business for this p
 
 ## License
 
-This project was created for academic purposes only (DC102 - Web Development 2, AY 2025–2026).
+This project was created for academic purposes only (BSCS 2B - DC102 - Web Development 2, May 2026).
 Do not reuse, redistribute, or claim this work as your own without permission from the original authors.
