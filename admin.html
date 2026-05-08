@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - AnJ Pizza</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body>
+
+    <!-- Login page -->
+    <div id="login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <div class="logo-img">
+                    <img src="images/logo.jpg" alt="logo" onerror="this.style.display='none'" />
+                    <span>LOGO</span>
+                </div>
+                <div>
+                    <div class="login-brand">AnJ Pizza</div>
+                    <div class="login-brand-sub">Admin Panel</div>
+                </div>
+            </div>
+
+            <h2>Sign In</h2>
+            <p>Enter your credentials to manage the store.</p>
+
+            <div class="fg">
+                <label>Username</label>
+                <input type="text" id="login-user" placeholder="Enter username"
+                    onkeydown="if(event.key==='Enter') doLogin()" />
+            </div>
+            <div class="fg">
+                <label>Password</label>
+                <input type="password" id="login-pass" placeholder="Enter password"
+                    onkeydown="if(event.key==='Enter') doLogin()" />
+            </div>
+
+            <div class="form-err" id="login-err"></div>
+            <button class="btn-red full" onclick="doLogin()">Login</button>
+        </div>
+    </div>
+
+
+    <!-- Admin panel -->
+    <div id="admin-page">
+
+        <!-- Top nav -->
+        <div class="admin-nav">
+            <a href="index.html" class="admin-logo">
+                <div class="logo-img sm">
+                    <img src="images/logo.jpg" alt="logo" onerror="this.style.display='none'" />
+                    <span>LOGO</span>
+                </div>
+                <div>
+                    <div class="al-name">AnJ Pizza</div>
+                    <div class="al-sub">Admin Panel</div>
+                </div>
+            </a>
+            <button class="logout-btn" onclick="doLogout()">Logout</button>
+        </div>
+
+        <!-- Tab navigation -->
+        <div class="admin-tabs">
+            <button class="tab-btn active" id="tabBtn-orders" onclick="switchTab('orders', this)">Orders</button>
+            <button class="tab-btn" id="tabBtn-menu" onclick="switchTab('menu', this)">Menu &amp; Add-Ons</button>
+            <button class="tab-btn" id="tabBtn-settings" onclick="switchTab('settings', this)">Settings</button>
+        </div>
+
+
+        <!-- ORDERS TAB -->
+        <div id="tab-orders" class="tab-panel active">
+            <div class="split-view">
+
+                <!-- Left: Active orders -->
+                <div class="split-pane split-left">
+                    <div class="pane-header">
+                        <div>
+                            <div class="pane-title">Active Orders</div>
+                            <div class="pane-sub">Pending · Preparing · Ready for Pickup</div>
+                        </div>
+                        <span class="count-badge" id="active-count">0 orders</span>
+                    </div>
+                    <div class="pane-body" id="orders-active-list">
+                        <div class="no-orders">Loading...</div>
+                    </div>
+                </div>
+
+                <div class="split-divider"></div>
+
+                <!-- Right: Completed orders only -->
+                <div class="split-pane split-right" id="pane-history">
+                    <div class="pane-header pane-header--right">
+                        <div>
+                            <div class="pane-title">Order History</div>
+                            <div class="pane-sub">Completed orders</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px">
+                            <span class="count-badge" id="all-count">0 orders</span>
+                            <button class="collapse-btn"
+                                onclick="togglePane('pane-history','pane-history-body','icon-history')"
+                                title="Minimize">
+                                <span id="icon-history">&#9660;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pane-body" id="pane-history-body" data-real-id="orders-all-list">
+                        <div class="no-orders" id="orders-all-list">Loading...</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- MENU & ADD-ONS TAB -->
+        <div id="tab-menu" class="tab-panel">
+            <div class="split-view">
+
+                <!-- Left: Pizza list -->
+                <div class="split-pane split-left">
+                    <div class="pane-header">
+                        <div>
+                            <div class="pane-title">Pizza Menu</div>
+                            <div class="pane-sub">Edit name, price, badge and availability</div>
+                        </div>
+                        <span class="count-badge" id="pizza-count">— items</span>
+                    </div>
+                    <div class="pane-body pane-body--table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Badge</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pizza-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="split-divider"></div>
+
+                <!-- Right: Add-Ons list -->
+                <div class="split-pane split-right" id="pane-addons">
+                    <div class="pane-header pane-header--right">
+                        <div>
+                            <div class="pane-title">Add-Ons</div>
+                            <div class="pane-sub">Edit add-on name, price and availability</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px">
+                            <span class="count-badge" id="addon-count">— items</span>
+                            <button class="collapse-btn"
+                                onclick="togglePane('pane-addons','pane-addons-body','icon-addons')" title="Minimize">
+                                <span id="icon-addons">&#9660;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pane-body pane-body--table" id="pane-addons-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="addon-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- SETTINGS TAB -->
+        <div id="tab-settings" class="tab-panel">
+            <div class="settings-body">
+                <div class="settings-grid">
+
+                    <!-- Change Username -->
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Change Username</h3>
+                            <p>Update your admin login username.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="pw-form">
+                                <div class="fg">
+                                    <label>New Username</label>
+                                    <input type="text" id="un-new" placeholder="Enter new username" />
+                                </div>
+                                <div class="fg">
+                                    <label>Current Password</label>
+                                    <input type="password" id="un-pass" placeholder="Confirm with your password" />
+                                </div>
+                                <div class="pw-msg" id="un-msg"></div>
+                                <button class="btn-dark" onclick="changeUsername()">Update Username</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Change Password</h3>
+                            <p>Update your admin login password.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="pw-form">
+                                <div class="fg">
+                                    <label>Current Password</label>
+                                    <input type="password" id="pw-curr" placeholder="Current password" />
+                                </div>
+                                <div class="fg">
+                                    <label>New Password</label>
+                                    <input type="password" id="pw-new" placeholder="At least 6 characters" />
+                                </div>
+                                <div class="fg">
+                                    <label>Confirm Password</label>
+                                    <input type="password" id="pw-conf" placeholder="Repeat new password" />
+                                </div>
+                                <div class="pw-msg" id="pw-msg"></div>
+                                <button class="btn-dark" onclick="changePassword()">Update Password</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clear Order History -->
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Clear Order History</h3>
+                            <p>Permanently delete all orders from the database.</p>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn-danger" onclick="clearAllHistory()">Clear All Orders</button>
+                            <p class="hint">This deletes ALL orders permanently and cannot be undone. The order counter
+                                is not affected.</p>
+                        </div>
+                    </div>
+
+                    <!-- Reset Order Counter -->
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Order Counter</h3>
+                            <p>Reset order numbers back to #0001. Does NOT delete existing orders.</p>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn-dark" onclick="resetOrderCounter()">Reset Order Counter</button>
+                            <p class="hint">Use this at the start of each day if you want numbers to restart from #0001.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Order Code -->
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>Order Code</h3>
+                            <p>The code posted at the counter. Customers type this to unlock walk-in ordering.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-row">
+                                <div class="code-display" id="code-display">1234</div>
+                                <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:140px;">
+                                    <label class="settings-label">New Code</label>
+                                    <input type="text" id="new-code" placeholder="Enter new code"
+                                        class="settings-inp" />
+                                </div>
+                                <button class="btn-red" onclick="updateCode()">Update</button>
+                            </div>
+                            <p class="hint">Change this whenever you want. Write the new code and post it at your
+                                counter.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end -->
+
+    <div class="toast" id="toast"></div>
+    <script src="admin.js"></script>
+</body>
+
+</html>
