@@ -111,13 +111,6 @@ anj-pizza/
 
 ---
 
-## Group Members
-
-BSCS 2B — Group 6 | AY 2025–2026
-DC102 - Web Development 2 
-
----
-
 ## License
 
 This project was created for academic purposes only (DC102 - Web Development 2, AY 2025–2026).
