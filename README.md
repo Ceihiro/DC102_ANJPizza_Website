@@ -143,9 +143,10 @@ anj-pizza/
 
 Special thanks to **AnJ Pizza** for allowing us to use their business for this project.
 
+> Built as part of DC102 - Web Development 2 · BSCS 2B · May 2026
+
 ---
 
 ## License
 
-This project was created for academic purposes only (BSCS 2B - DC102 - Web Development 2, May 2026).
-Do not reuse, redistribute, or claim this work as your own without permission from the original authors.
+All rights reserved. Do not reuse, redistribute, or claim this work as your own without permission from the original authors.
