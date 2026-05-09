@@ -143,7 +143,7 @@ anj-pizza/
 
 Special thanks to **AnJ Pizza** for allowing us to use their business for this project.
 
-> Built as part of DC102 - Web Development 2 · BSCS 2B · May 2026
+> Built as part of DC102 - Web Development 2 · BSCS 2B · Group 6 · May 2026
 
 ---
 
